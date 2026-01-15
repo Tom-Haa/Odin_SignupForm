@@ -137,7 +137,6 @@ body {
 
 .logo img {
     height: 200px;
-    /* oder was passt */
     filter: invert(1);
 }
 
@@ -151,15 +150,39 @@ body {
     font-size: 0.85rem;
     font-weight: 500;
     letter-spacing: 0.05em;
-    text-transform: uppercase;
     opacity: 0.85;
     margin-top: 2rem;
 }
 
 .input {
+    color: white;
     min-height: 40px;
     background: transparent;
     border: 2px solid white;
     border-radius: 5px;
-    
+}
+
+input[type="email"]:user-valid {
+border-color: rgb(58, 145, 58);
+}
+
+input[type="email"]:user-invalid {
+border-color: rgb(156, 55, 55);
+}
+
+.input:focus {
+outline: none;
+border-color: rgb(54, 72, 80);
+}
+
+.formbox select {
+    color: white;
+    background-color: transparent;
+    border: 1px solid white;
+    padding: 0.5rem;
+}
+
+.formbox option {
+    color: black;
+    background-color: white;
 }
