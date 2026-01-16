@@ -1,56 +1,54 @@
+/* =========================
+   FONT FACE
+========================= */
 @font-face {
-    font-family: "Wotfard";
-    src: url("./fonts/wotfard-regular.woff2") format("woff2");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
+  font-family: "Wotfard";
+  src: url("./fonts/wotfard-regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
-/* 1. Use a more-intuitive box-sizing model */
+/* =========================
+   CSS RESET (Josh W. Comeau)
+========================= */
 *,
 *::before,
-*::after {+
-    box-sizing: border-box;
+*::after {
+  box-sizing: border-box;
 }
 
-/* 2. Remove default margin */
 *:not(dialog) {
-    margin: 0;
+  margin: 0;
 }
 
-/* 3. Enable keyword animations */
 @media (prefers-reduced-motion: no-preference) {
-    html {
-        interpolate-size: allow-keywords;
-    }
+  html {
+    interpolate-size: allow-keywords;
+  }
 }
 
 body {
-    /* 4. Add accessible line-height */
-    line-height: 1.5;
-    /* 5. Improve text rendering */
-    -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* 6. Improve media defaults */
 img,
 picture,
 video,
 canvas,
 svg {
-    display: block;
-    max-width: 100%;
+  display: block;
+  max-width: 100%;
 }
 
-/* 7. Inherit fonts for form controls */
 input,
 button,
 textarea,
 select {
-    font: inherit;
+  font: inherit;
 }
 
-/* 8. Avoid text overflows */
 p,
 h1,
 h2,
@@ -58,12 +56,11 @@ h3,
 h4,
 h5,
 h6 {
-    overflow-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
-/* 9. Improve line wrapping */
 p {
-    text-wrap: pretty;
+  text-wrap: pretty;
 }
 
 h1,
@@ -72,210 +69,260 @@ h3,
 h4,
 h5,
 h6 {
-    text-wrap: balance;
+  text-wrap: balance;
 }
 
-/*
-  10. Create a root stacking context
-*/
 #root,
 #__next {
-    isolation: isolate;
+  isolation: isolate;
 }
 
+/* =========================
+   DESIGN TOKENS (CI / VARIABLES)
+========================= */
 :root {
-    --accentcolor: rgb(53, 102, 81); /* global scope */
-   /* Core surfaces */
-   --color-bg: #0e1211;          /* page background */
-   --color-surface: #141a18;     /* cards / glass */
-   --color-border: rgba(238, 242, 239, 0.65);
- 
-   /* Text */
-   --color-text: #eef2ef;        /* primary text */
-   --color-text-muted: rgba(238, 242, 239, 0.7);
- 
-   /* Brand / Action */
-   --color-primary: #2f5f4b;     /* buttons, active */
-   --color-accent: #c96a3a;      /* links, highlights */
- 
-   /* Optional subtle highlight (very sparing) */
-   --color-highlight: #b8c6d6;
- 
-   /* Gradients */
-   --gradient-brand: linear-gradient(
-     135deg,
-     var(--color-text) 0%,
-     var(--color-highlight) 45%,
-     var(--color-primary) 100%
-   );
- 
-   --gradient-logo: linear-gradient(
-     135deg,
-     var(--color-text) 0%,
-     var(--color-accent) 55%,
-     var(--color-primary) 100%
-   );
- 
-   /* Effects */
-   --shadow-lg: 0 12px 34px rgba(0, 0, 0, 0.55);
-  }
+  /* Surfaces */
+  --color-bg: #0e1211;
+  --color-surface: #141a18;
+  --color-border: rgba(238, 242, 239, 0.65);
 
+  /* Text */
+  --color-text: #eef2ef;
+  --color-text-muted: rgba(238, 242, 239, 0.7);
+  --color-placeholder: rgba(238, 242, 239, 0.35);
+
+  /* Brand */
+  --color-primary: #2f5f4b;
+  --color-primary-hover: #3e7a5f;
+  --color-accent: #c96a3a;
+  --color-highlight: #b8c6d6;
+
+  /* Validation */
+  --color-success: #3a9149;
+  --color-error: #9c3737;
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, var(--color-text) 0%, var(--color-highlight) 45%, var(--color-primary) 100%);
+  --gradient-logo: linear-gradient(135deg, var(--color-text) 0%, var(--color-accent) 55%, var(--color-primary) 100%);
+
+  /* Effects */
+  --shadow-lg: 0 12px 34px rgba(0, 0, 0, 0.55);
+
+  /* Layout knobs (non-responsive by choice) */
+  --page-left-padding: 20rem;
+  --form-width: 500px;
+
+  /* Glow helpers */
+  --glow-soft: rgba(184, 198, 214, 0.35);
+  --glow-warm: rgba(201, 106, 58, 0.25);
+}
+
+/* =========================
+   PAGE BACKGROUND + LAYOUT
+========================= */
 body {
-    font-family: "Wotfard", "Wotfard-fallback", sans-serif;
-    min-height: 100vh;
-    background-image:
-        linear-gradient(to right,
-            rgba(16, 17, 17, 1),
-            rgba(16, 17, 17, 1),
-            rgba(16, 17, 17, 0),
+  font-family: "Wotfard", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  min-height: 100vh;
+  background-color: var(--color-bg);
 
-            rgba(16, 17, 17, 0)),
-        url("./media/astronaut.png");
+  background-image:
+    linear-gradient(to right,
+      rgba(16, 17, 17, 1) 0%,
+      rgba(16, 17, 17, 1) 25%,
+      rgba(16, 17, 17, 0.9) 35%,
+      rgba(16, 17, 17, 0.6) 45%,
+      rgba(16, 17, 17, 0) 100%
+    ),
+    url("./media/astronaut.png");
 
-    background-size: cover, cover;
-    background-repeat: no-repeat, no-repeat;
+  background-size: cover, cover;
+  background-repeat: no-repeat, no-repeat;
+  background-position: center, calc(90% + 350px) center;
 
-    background-position: center, calc(90% + 350px) center;
-
-    background-color: black;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 20rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: var(--page-left-padding);
 }
 
-
-.formbox {
-    min-height: 70vh;
-    background-color: white;
-    padding: 4rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    position: relative;
-    left: auto;
-    width: 500px;
-    color: var(--color-text);
-    border: 2px solid white;
-    border-radius: 0.8rem;
-    background: transparent;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
-    backdrop-filter: blur(10px);
-    align-self: center;
-    gap: .3rem;
-}
-
+/* =========================
+   LOGO (GRADIENT + GLOW)
+========================= */
 .logo {
-    position: fixed;
-    top: 1rem;
-    left: 1rem;
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  width: 120px;
+  height: 120px;
+
+  background: var(--gradient-logo);
+
+  -webkit-mask: url("./media/logo.png") center / contain no-repeat;
+  mask: url("./media/logo.png") center / contain no-repeat;
+
+  filter: drop-shadow(0 0 18px var(--glow-soft)) drop-shadow(0 0 40px var(--glow-warm));
 }
 
-.logo img {
-    height: 200px;
-    filter: invert(1);
+/* =========================
+   FORM CARD (GLASS)
+========================= */
+.formbox {
+  min-height: 70vh;
+  width: 600px;
+
+  padding: 4rem;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.3rem;
+
+  color: var(--color-text);
+  border: 2px solid var(--color-border);
+  border-radius: 0.8rem;
+
+  background: transparent;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(10px);
+
+  align-self: center;
 }
 
 .formbox h1 {
-    text-align: center;
+  text-align: center;
 }
 
-
+/* =========================
+   FORM TYPOGRAPHY
+========================= */
 .formbox label {
-    display: block;
-    font-size: 0.85rem;
-    font-weight: 500;
-    letter-spacing: 0.05em;
-    opacity: 0.85;
-    margin-top: 2rem;
-}
-
-.input {
-    color: white;
-    min-height: 40px;
-    background: transparent;
-    border: 2px solid white;
-    border-radius: 5px;
-    padding-left: 1rem;
-}
-
-input[type="email"]:user-valid {
-border-color: rgb(58, 145, 58);
-}
-
-input[type="email"]:user-invalid {
-border-color: rgb(156, 55, 55);
-}
-
-.input:focus {
-border-color: rgb(54, 72, 80);
-box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-background-color: rgba(143, 160, 156, .2);
-}
-
-.formbox select {
-    color: white;
-    background-color: transparent;
-    border: 1px solid white;
-    padding: 0.5rem;
-}
-
-.formbox option {
-    color: black;
-    background-color: white;
-}
-
-.register {
-    color: white;
-    background-color: var(--accentcolor);
-    margin-top: 3vh;
-    min-height: 5vh;
-    border-radius: 9px;
-}
-
-a {
-    color: var(--accentcolor);
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  opacity: 0.85;
+  margin-top: 2rem;
 }
 
 .pwhint {
-    font-size: 0.8rem;
-    color: var(--accentcolor);
-    padding-left: 1rem;
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  padding-left: 1rem;
 }
 
-::placeholder {
-    color: rgb(69, 77, 75);
-    font-size: 0.9rem;
-    opacity: 0.7;
-  }
+/* =========================
+   INPUTS + SELECT (BASE)
+========================= */
+.input {
+  color: var(--color-text);
+  min-height: 40px;
 
-  .login {
-    margin-top: 1rem;
-    align-self: center;
-  }
-  .sloganContainer {
-    position: fixed;
-    bottom: 6rem;
-    right: 6rem;
-    text-align: right;
-  }
-  
+  background: transparent;
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
 
-  .slogan {
-    font-size: 4rem;
-    font-weight: 800;
-    text-shadow: 0 0 20px rgba(122, 162, 255, 0.25);
+  padding: 0.6rem 1rem;
+}
 
-    background: var(--gradient-brand)
-    );
-  
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
+.input::placeholder {
+  color: var(--color-placeholder);
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
 
-  .desc {
-    color: white;
-    font-size: 1.5rem;
-    opacity: 0.8;
-  }
+.input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.formbox select.input {
+  color: var(--color-text);
+  background: transparent;
+  border: 2px solid var(--color-border);
+  border-radius: 5px;
+  padding: 0.6rem 1rem;
+}
+
+.formbox option {
+  color: #000;
+  background: #fff;
+}
+
+/* =========================
+   VALIDATION (NO JS)
+========================= */
+input:user-valid {
+  border-color: var(--color-success);
+}
+
+input:user-invalid {
+  border-color: var(--color-error);
+}
+
+input[type="password"]:user-valid + .pwhint {
+  color: var(--color-success);
+}
+
+input[type="password"]:user-invalid + .pwhint {
+  color: var(--color-error);
+}
+
+/* =========================
+   PRIMARY BUTTON
+========================= */
+.register {
+  margin-top: 3vh;
+  min-height: 5vh;
+
+  color: var(--color-text);
+  background: var(--color-primary);
+
+  border: none;
+  border-radius: 9px;
+}
+
+.register:hover {
+  background: var(--color-primary-hover);
+}
+
+/* =========================
+   LINKS / LOGIN ROW
+========================= */
+a {
+  color: var(--color-accent);
+}
+
+.login {
+  margin-top: 1rem;
+  align-self: center;
+}
+
+/* =========================
+   HERO SLOGAN (BOTTOM RIGHT)
+========================= */
+.sloganContainer {
+  position: fixed;
+  bottom: 6rem;
+  right: 6rem;
+  text-align: right;
+}
+
+.slogan {
+  font-size: 4rem;
+  font-weight: 800;
+
+  background: var(--gradient-brand);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+
+  text-shadow: 0 0 18px rgba(184, 198, 214, 0.25), 0 0 40px rgba(47, 95, 75, 0.25);
+}
+
+.desc {
+  color: var(--color-text);
+  font-size: 1.5rem;
+  opacity: 0.8;
+}
