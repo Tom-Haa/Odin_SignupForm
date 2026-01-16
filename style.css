@@ -9,7 +9,7 @@
 /* 1. Use a more-intuitive box-sizing model */
 *,
 *::before,
-*::after {
+*::after {+
     box-sizing: border-box;
 }
 
@@ -83,43 +83,79 @@ h6 {
     isolation: isolate;
 }
 
+:root {
+    --accentcolor: rgb(53, 102, 81); /* global scope */
+   /* Core surfaces */
+   --color-bg: #0e1211;          /* page background */
+   --color-surface: #141a18;     /* cards / glass */
+   --color-border: rgba(238, 242, 239, 0.65);
+ 
+   /* Text */
+   --color-text: #eef2ef;        /* primary text */
+   --color-text-muted: rgba(238, 242, 239, 0.7);
+ 
+   /* Brand / Action */
+   --color-primary: #2f5f4b;     /* buttons, active */
+   --color-accent: #c96a3a;      /* links, highlights */
+ 
+   /* Optional subtle highlight (very sparing) */
+   --color-highlight: #b8c6d6;
+ 
+   /* Gradients */
+   --gradient-brand: linear-gradient(
+     135deg,
+     var(--color-text) 0%,
+     var(--color-highlight) 45%,
+     var(--color-primary) 100%
+   );
+ 
+   --gradient-logo: linear-gradient(
+     135deg,
+     var(--color-text) 0%,
+     var(--color-accent) 55%,
+     var(--color-primary) 100%
+   );
+ 
+   /* Effects */
+   --shadow-lg: 0 12px 34px rgba(0, 0, 0, 0.55);
+  }
 
 body {
     font-family: "Wotfard", "Wotfard-fallback", sans-serif;
     min-height: 100vh;
     background-image:
         linear-gradient(to right,
-            rgba(16, 17, 17, 1) 0%,
-            rgba(16, 17, 17, 1) 25%,
-            rgba(16, 17, 17, 0.9) 35%,
-            rgba(16, 17, 17, 0.7) 45%,
-            rgba(16, 17, 17, 0) 100%),
+            rgba(16, 17, 17, 1),
+            rgba(16, 17, 17, 1),
+            rgba(16, 17, 17, 0),
+
+            rgba(16, 17, 17, 0)),
         url("./media/astronaut.png");
 
     background-size: cover, cover;
     background-repeat: no-repeat, no-repeat;
 
-    background-position: center, calc(50% + 550px) center;
+    background-position: center, calc(90% + 350px) center;
 
     background-color: black;
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 40rem;
+    padding-left: 20rem;
 }
 
 
 .formbox {
     min-height: 70vh;
     background-color: white;
-    padding: 5rem;
+    padding: 4rem;
     display: flex;
     justify-content: center;
     flex-direction: column;
     position: relative;
     left: auto;
-    width: 600px;
-    color: #fff;
+    width: 500px;
+    color: var(--color-text);
     border: 2px solid white;
     border-radius: 0.8rem;
     background: transparent;
@@ -160,6 +196,7 @@ body {
     background: transparent;
     border: 2px solid white;
     border-radius: 5px;
+    padding-left: 1rem;
 }
 
 input[type="email"]:user-valid {
@@ -171,8 +208,9 @@ border-color: rgb(156, 55, 55);
 }
 
 .input:focus {
-outline: none;
 border-color: rgb(54, 72, 80);
+box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+background-color: rgba(143, 160, 156, .2);
 }
 
 .formbox select {
@@ -186,3 +224,58 @@ border-color: rgb(54, 72, 80);
     color: black;
     background-color: white;
 }
+
+.register {
+    color: white;
+    background-color: var(--accentcolor);
+    margin-top: 3vh;
+    min-height: 5vh;
+    border-radius: 9px;
+}
+
+a {
+    color: var(--accentcolor);
+}
+
+.pwhint {
+    font-size: 0.8rem;
+    color: var(--accentcolor);
+    padding-left: 1rem;
+}
+
+::placeholder {
+    color: rgb(69, 77, 75);
+    font-size: 0.9rem;
+    opacity: 0.7;
+  }
+
+  .login {
+    margin-top: 1rem;
+    align-self: center;
+  }
+  .sloganContainer {
+    position: fixed;
+    bottom: 6rem;
+    right: 6rem;
+    text-align: right;
+  }
+  
+
+  .slogan {
+    font-size: 4rem;
+    font-weight: 800;
+    text-shadow: 0 0 20px rgba(122, 162, 255, 0.25);
+
+    background: var(--gradient-brand)
+    );
+  
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .desc {
+    color: white;
+    font-size: 1.5rem;
+    opacity: 0.8;
+  }
